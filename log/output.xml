@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.3 on win32)" generated="2026-02-19T15:56:56.377684" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Mock Aws" source="C:\Users\simra\Desktop\AWSTest_RF\test_mock_aws.robot">
+<test id="s1-t1" name="Full AWS Mock Test" line="5">
+<kw name="Start Mock Aws" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:56.756287" level="INFO">Starting Moto AWS mock environment</msg>
+<msg time="2026-02-19T15:56:56.757272" level="INFO">Starting Moto AWS mock environment</msg>
+<msg time="2026-02-19T15:56:56.760485" level="INFO">Moto AWS mock started successfully</msg>
+<msg time="2026-02-19T15:56:56.760827" level="INFO">Moto AWS mock started successfully</msg>
+<status status="PASS" start="2026-02-19T15:56:56.756049" elapsed="0.004931"/>
+</kw>
+<kw name="Create S3 Bucket" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:56.761724" level="INFO">Creating S3 bucket: demo-bucket</msg>
+<msg time="2026-02-19T15:56:56.761910" level="INFO">Creating S3 bucket: demo-bucket</msg>
+<msg time="2026-02-19T15:56:56.822783" level="INFO">Found credentials in environment variables.</msg>
+<msg time="2026-02-19T15:56:57.029340" level="INFO">S3 bucket created: demo-bucket</msg>
+<msg time="2026-02-19T15:56:57.029581" level="INFO">S3 bucket created: demo-bucket</msg>
+<arg>demo-bucket</arg>
+<status status="PASS" start="2026-02-19T15:56:56.761327" elapsed="0.268574"/>
+</kw>
+<kw name="List S3 Buckets" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:57.030423" level="INFO">Listing S3 buckets</msg>
+<msg time="2026-02-19T15:56:57.030522" level="INFO">Listing S3 buckets</msg>
+<msg time="2026-02-19T15:56:57.038723" level="INFO">Buckets found: ['demo-bucket']</msg>
+<msg time="2026-02-19T15:56:57.038896" level="INFO">Buckets found: ['demo-bucket']</msg>
+<msg time="2026-02-19T15:56:57.039170" level="INFO">${buckets} = ['demo-bucket']</msg>
+<var>${buckets}</var>
+<status status="PASS" start="2026-02-19T15:56:57.030155" elapsed="0.009077"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${buckets}</arg>
+<arg>demo-bucket</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-02-19T15:56:57.039377" elapsed="0.000667"/>
+</kw>
+<kw name="Create Queue" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:57.040443" level="INFO">Creating SQS queue: demo-queue</msg>
+<msg time="2026-02-19T15:56:57.040552" level="INFO">Creating SQS queue: demo-queue</msg>
+<msg time="2026-02-19T15:56:57.207378" level="INFO">Queue created with URL: https://sqs.us-east-1.amazonaws.com/123456789012/demo-queue</msg>
+<msg time="2026-02-19T15:56:57.207559" level="INFO">Queue created with URL: https://sqs.us-east-1.amazonaws.com/123456789012/demo-queue</msg>
+<msg time="2026-02-19T15:56:57.207769" level="INFO">${url} = https://sqs.us-east-1.amazonaws.com/123456789012/demo-queue</msg>
+<var>${url}</var>
+<arg>demo-queue</arg>
+<status status="PASS" start="2026-02-19T15:56:57.040274" elapsed="0.167551"/>
+</kw>
+<kw name="Send Message" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:57.208140" level="INFO">Sending message to queue: hello world</msg>
+<msg time="2026-02-19T15:56:57.208222" level="INFO">Sending message to queue: hello world</msg>
+<msg time="2026-02-19T15:56:57.223955" level="INFO">Message sent</msg>
+<msg time="2026-02-19T15:56:57.224112" level="INFO">Message sent</msg>
+<arg>${url}</arg>
+<arg>hello world</arg>
+<status status="PASS" start="2026-02-19T15:56:57.207966" elapsed="0.016306"/>
+</kw>
+<kw name="Receive Messages" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:57.224597" level="INFO">Receiving messages from queue</msg>
+<msg time="2026-02-19T15:56:57.224683" level="INFO">Receiving messages from queue</msg>
+<msg time="2026-02-19T15:56:57.229314" level="INFO">Messages received: ['hello world']</msg>
+<msg time="2026-02-19T15:56:57.229459" level="INFO">Messages received: ['hello world']</msg>
+<msg time="2026-02-19T15:56:57.229648" level="INFO">${msgs} = ['hello world']</msg>
+<var>${msgs}</var>
+<arg>${url}</arg>
+<status status="PASS" start="2026-02-19T15:56:57.224421" elapsed="0.005277"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${msgs}</arg>
+<arg>hello world</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-02-19T15:56:57.229844" elapsed="0.000338"/>
+</kw>
+<kw name="Create Table" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:57.230389" level="INFO">Creating DynamoDB table: demo-table</msg>
+<msg time="2026-02-19T15:56:57.230468" level="INFO">Creating DynamoDB table: demo-table</msg>
+<msg time="2026-02-19T15:56:57.265662" level="INFO">Table created</msg>
+<msg time="2026-02-19T15:56:57.265886" level="INFO">Table created</msg>
+<arg>demo-table</arg>
+<status status="PASS" start="2026-02-19T15:56:57.230287" elapsed="0.035853"/>
+</kw>
+<kw name="Put Item" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:57.266583" level="INFO">Inserting item into demo-table: id=1, value=value123</msg>
+<msg time="2026-02-19T15:56:57.266677" level="INFO">Inserting item into demo-table: id=1, value=value123</msg>
+<msg time="2026-02-19T15:56:57.270916" level="INFO">Item inserted</msg>
+<msg time="2026-02-19T15:56:57.271058" level="INFO">Item inserted</msg>
+<arg>demo-table</arg>
+<arg>1</arg>
+<arg>value123</arg>
+<status status="PASS" start="2026-02-19T15:56:57.266353" elapsed="0.004863"/>
+</kw>
+<kw name="Get Item" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:57.271516" level="INFO">Fetching item from demo-table with id=1</msg>
+<msg time="2026-02-19T15:56:57.271597" level="INFO">Fetching item from demo-table with id=1</msg>
+<msg time="2026-02-19T15:56:57.275948" level="INFO">Retrieved value: value123</msg>
+<msg time="2026-02-19T15:56:57.276107" level="INFO">Retrieved value: value123</msg>
+<msg time="2026-02-19T15:56:57.276313" level="INFO">${val} = value123</msg>
+<var>${val}</var>
+<arg>demo-table</arg>
+<arg>1</arg>
+<status status="PASS" start="2026-02-19T15:56:57.271367" elapsed="0.005002"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${val}</arg>
+<arg>value123</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-02-19T15:56:57.276516" elapsed="0.000332"/>
+</kw>
+<kw name="Stop Mock Aws" owner="mock_aws_library">
+<msg time="2026-02-19T15:56:57.277047" level="INFO">Stopping Moto AWS mock environment</msg>
+<msg time="2026-02-19T15:56:57.277129" level="INFO">Stopping Moto AWS mock environment</msg>
+<msg time="2026-02-19T15:56:57.277564" level="INFO">Moto AWS mock stopped</msg>
+<msg time="2026-02-19T15:56:57.277668" level="INFO">Moto AWS mock stopped</msg>
+<status status="PASS" start="2026-02-19T15:56:57.276957" elapsed="0.000771"/>
+</kw>
+<status status="PASS" start="2026-02-19T15:56:56.755281" elapsed="0.522560"/>
+</test>
+<status status="PASS" start="2026-02-19T15:56:56.388252" elapsed="0.890013"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Mock Aws" id="s1" pass="1" fail="0" skip="0">Test Mock Aws</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
